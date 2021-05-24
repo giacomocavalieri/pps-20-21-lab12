@@ -4,6 +4,11 @@ object Permutation {
     case _ => for ((x, xs) <- splits(l); perm <- permute(xs)) yield x::perm
   }
 
+  /**
+   * Returns a stream of all the tuples (a, as) obtained from the list "l"
+   * where "a" is an element of "l" and "as" is the list "l" where "a" was
+   * removed.
+   */
   def splits[A](l: List[A]): LazyList[(A, List[A])] = l match {
     case Nil => LazyList()
     case x::xs => (splits(xs) map(e => (e._1, x::e._2))) :+ (x, xs)
